@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 5.2 - Pruebas BDD con Gherkin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0f172a; /* slate-900 */
+            color: #f8fafc; /* slate-50 */
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .gherkin-block {
+            background-color: #1e293b; /* slate-800 */
+            border-left: 4px solid #3b82f6; /* blue-500 */
+        }
+        .keyword { color: #c678dd; font-weight: bold; } /* Given, When, Then */
+        .string { color: #98c379; } /* "text" */
+        .scenario-title { color: #61afef; font-weight: bold; }
+        .feature-title { color: #e5c07b; font-weight: bold; }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Encabezado -->
+        <header class="border-b border-slate-700 pb-6 mb-10">
+            <h1 class="text-4xl font-extrabold text-blue-400 mb-2">Práctica 5.2: Pruebas BDD con Gherkin</h1>
+            <p class="text-xl text-slate-400 mb-6">Documentación de Comportamiento de Software</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-800 p-6 rounded-lg shadow-lg">
+                <div>
+                    <p class="text-slate-400 text-sm">Estudiante</p>
+                    <p class="font-semibold text-lg">Kendri Miguel Tatis de Jesus</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm">Institución</p>
+                    <p class="font-semibold text-lg">Universidad Autónoma de Santo Domingo (UASD)</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm">Aplicación Evaluada</p>
+                    <p class="font-semibold text-lg">Plataforma de Food Delivery</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm">Herramienta / Metodología</p>
+                    <p class="font-semibold text-lg">Gherkin (Cucumber / BDD)</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Funcionalidad Principal -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold border-b border-slate-700 pb-2 mb-4 text-white flex items-center">
+                <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                1. Funcionalidad Principal Definida
+            </h2>
+            <div class="bg-slate-800 p-6 rounded-lg">
+                <h3 class="text-xl font-bold text-blue-300 mb-2">Gestión de Carrito y Procesamiento de Pagos</h3>
+                <p class="text-slate-300">
+                    La funcionalidad central elegida para esta práctica es el flujo de compra de una aplicación de entrega de comida. Abarca desde que el usuario agrega productos al carrito, la validación de horarios del restaurante, hasta el procesamiento final del pago (exitoso o denegado).
+                </p>
+            </div>
+        </section>
+
+        <!-- Escenarios Gherkin -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold border-b border-slate-700 pb-2 mb-6 text-white flex items-center">
+                <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                2. Escenarios de Prueba (Gherkin)
+            </h2>
+
+            <!-- Escenario 1 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="text-lg font-bold text-emerald-400">Escenario 1: Agregar producto (Caso Exitoso)</h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-3"><strong>Objetivo:</strong> Valida que el sistema actualice el contador de artículos y calcule correctamente el subtotal cuando un usuario añade un producto por primera vez.</p>
+                
+                <div class="gherkin-block p-5 rounded-lg font-mono text-sm shadow-md">
+                    <span class="feature-title">Feature:</span> Gestión del carrito de compras<br><br>
+                    <span class="scenario-title">Scenario:</span> Agregar un producto al carrito vacío<br>
+                    &nbsp;&nbsp;<span class="keyword">Given</span> que el usuario ha iniciado sesión en la aplicación<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el carrito de compras está vacío<br>
+                    &nbsp;&nbsp;<span class="keyword">When</span> el usuario agrega <span class="string">"1 Pizza Familiar"</span> al carrito<br>
+                    &nbsp;&nbsp;<span class="keyword">Then</span> el ícono del carrito debe mostrar <span class="string">"1"</span> artículo<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el subtotal a pagar debe ser <span class="string">"$18.00"</span>
+                </div>
+            </div>
+
+            <!-- Escenario 2 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="text-lg font-bold text-emerald-400">Escenario 2: Pago aprobado (Caso Exitoso)</h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-3"><strong>Objetivo:</strong> Valida el flujo completo de checkout comprobando que una tarjeta con fondos apruebe el pedido y genere la confirmación.</p>
+                
+                <div class="gherkin-block p-5 rounded-lg font-mono text-sm shadow-md">
+                    <span class="scenario-title">Scenario:</span> Procesar el pago de un pedido con tarjeta válida<br>
+                    &nbsp;&nbsp;<span class="keyword">Given</span> que el usuario tiene productos en el carrito por un total de <span class="string">"$25.00"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> se encuentra en la pantalla de confirmación de pago<br>
+                    &nbsp;&nbsp;<span class="keyword">When</span> el usuario ingresa una tarjeta de crédito válida<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> presiona el botón <span class="string">"Pagar Ahora"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">Then</span> el sistema debe procesar el cobro exitosamente<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> redirigir a la pantalla de <span class="string">"Pedido Confirmado"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> enviar un recibo al correo del usuario
+                </div>
+            </div>
+
+            <!-- Escenario 3 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="text-lg font-bold text-red-400">Escenario 3: Tarjeta rechazada (Caso de Error)</h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-3"><strong>Objetivo:</strong> Valida que la aplicación maneje correctamente las denegaciones bancarias, mostrando un error amigable sin perder los artículos del carrito.</p>
+                
+                <div class="gherkin-block p-5 rounded-lg font-mono text-sm shadow-md">
+                    <span class="scenario-title">Scenario:</span> Intento de pago con tarjeta sin fondos suficientes<br>
+                    &nbsp;&nbsp;<span class="keyword">Given</span> que el usuario intenta pagar un total de <span class="string">"$30.00"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">When</span> el usuario ingresa una tarjeta de crédito sin fondos<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> presiona el botón <span class="string">"Pagar Ahora"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">Then</span> el sistema bancario debe rechazar la transacción<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el sistema debe mostrar la alerta <span class="string">"Pago declinado. Verifique su balance."</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el carrito de compras debe conservar los productos seleccionados
+                </div>
+            </div>
+
+            <!-- Escenario 4 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="text-lg font-bold text-red-400">Escenario 4: Restaurante cerrado (Caso de Error)</h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-3"><strong>Objetivo:</strong> Valida la lógica de negocio respecto a los horarios de atención, evitando que se envíen pedidos a comercios que ya no están operando.</p>
+                
+                <div class="gherkin-block p-5 rounded-lg font-mono text-sm shadow-md">
+                    <span class="scenario-title">Scenario:</span> Realizar un pedido fuera del horario de servicio<br>
+                    &nbsp;&nbsp;<span class="keyword">Given</span> que el usuario está viendo el menú de <span class="string">"Pizzería Rafa"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el horario actual es <span class="string">"11:30 PM"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el horario de cierre del establecimiento es <span class="string">"10:00 PM"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">When</span> el usuario intenta agregar un producto al carrito<br>
+                    &nbsp;&nbsp;<span class="keyword">Then</span> el sistema debe bloquear la acción<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> mostrar el mensaje <span class="string">"Restaurante cerrado. Abre mañana a las 11:00 AM"</span>
+                </div>
+            </div>
+
+            <!-- Escenario 5 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="text-lg font-bold text-emerald-400">Escenario 5: Uso de cupón promocional (Caso Exitoso)</h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-3"><strong>Objetivo:</strong> Valida el motor de promociones, comprobando que se apliquen las deducciones matemáticas correctas al total antes de pagar.</p>
+                
+                <div class="gherkin-block p-5 rounded-lg font-mono text-sm shadow-md">
+                    <span class="scenario-title">Scenario:</span> Aplicar un cupón de descuento válido antes del pago<br>
+                    &nbsp;&nbsp;<span class="keyword">Given</span> que el usuario tiene un pedido con un subtotal de <span class="string">"$20.00"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">When</span> el usuario ingresa el cupón <span class="string">"DESC20"</span> en la caja de texto<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> presiona el botón <span class="string">"Aplicar"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">Then</span> el sistema debe validar el cupón como exitoso<br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> el nuevo total a pagar debe actualizarse a <span class="string">"$16.00"</span><br>
+                    &nbsp;&nbsp;<span class="keyword">And</span> mostrar un mensaje en verde indicando <span class="string">"-20% aplicado"</span>
+                </div>
+            </div>
+
+        </section>
+        
+        <footer class="text-center text-slate-500 text-sm mt-12 pt-6 border-t border-slate-800">
+            <p>Documentación de pruebas BDD generada para requerimientos universitarios.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
